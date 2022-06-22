@@ -12,7 +12,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -79,6 +78,13 @@
             <artifactId>jackson-databind</artifactId>
             <version>LATEST</version>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>6.6.4</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,4 +1,4 @@
-package oppenheimer.pojos.request;
+package oppenheimer.pojos.response;
 
 import io.cucumber.messages.internal.com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

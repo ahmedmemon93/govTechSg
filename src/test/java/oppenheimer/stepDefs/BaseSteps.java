@@ -2,30 +2,36 @@ package oppenheimer.stepDefs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.TestContext;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.messages.internal.com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import oppenheimer.APIRequests.CustomeRequest;
 import oppenheimer.helpers.Context;
 import oppenheimer.helpers.EndPoints;
-import oppenheimer.pojos.request.TaxReliefResponse;
-
-import java.lang.reflect.Type;
-import java.util.List;
+import oppenheimer.pojos.response.TaxReliefResponse;
 
 public class BaseSteps {
     TestContext testConext;
-    public BaseSteps(TestContext testContext){
+
+    public BaseSteps(TestContext testContext) {
         testConext = testContext;
     }
 
-    @When("^user calls get API end point (.*) with given request body$")
-    public void user_calls_getAPI_without_body(String apiEndPoint) throws JsonProcessingException {
-        String request = testConext.getScenarioContext().getContext(Context.API_REQUEST).toString();
+    @Before
+    public void beforeMethod() {
+
+    }
+
+    @When("^user calls (.*) API end point (.*) with given request body$")
+    public void user_calls_getAPI_without_body(String methodType, String apiEndPoint) throws JsonProcessingException {
         CustomeRequest customeRequest = new CustomeRequest();
-        customeRequest.getAPICall(EndPoints.valueOf(apiEndPoint), testConext);
+        if (methodType.equalsIgnoreCase("get")) {
+            customeRequest.getAPICall(EndPoints.valueOf(apiEndPoint), testConext);
+        } else {
+            customeRequest.postAPICall(EndPoints.valueOf(apiEndPoint), testConext);
+        }
     }
 
     @And("^Validate relief API response$")
@@ -38,5 +44,6 @@ public class BaseSteps {
         } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+        testConext.getScenarioContext().setContext(Context.TEX_REFLIEF_RESPONSE, taxReliefResponses);
     }
 }

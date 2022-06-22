@@ -1,5 +1,6 @@
 Feature: As the Clerk, I should be able to insert a single record of working class hero into database via an API
 
+  @multipleRecrd @regression
   Scenario: [ADD List] Single record of a working class hero can be added via list
     Given User creates an API request with following values
       | natid     | birthday | gender | name         | tax | salary |
