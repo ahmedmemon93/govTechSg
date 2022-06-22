@@ -2,10 +2,12 @@ package cucumber;
 
 public class TestContext {
     ScenarioContext scenarioContext;
-    public TestContext(){
+
+    public TestContext() {
         scenarioContext = new ScenarioContext();
     }
-    public ScenarioContext getScenarioContext(){
+
+    public ScenarioContext getScenarioContext() {
         return scenarioContext;
     }
 }
